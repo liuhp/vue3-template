@@ -1,5 +1,5 @@
 <template>
-<div>lalalla</div>
+<div>mirror</div>
 </template>
 <script lang="ts">
 </script>

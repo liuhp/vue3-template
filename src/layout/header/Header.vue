@@ -1,7 +1,6 @@
 <template>
-  <!-- <Collapse></Collapse>
-  <BreadCom></BreadCom> -->
-  toubu
+  <Collapse></Collapse>
+  <!-- <BreadCom></BreadCom> -->
 </template>
 <script setup lang="ts">
 import Collapse from './Collapse.vue'

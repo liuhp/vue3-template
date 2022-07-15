@@ -1,5 +1,5 @@
 <template>
-  <MenuLogo v-if="!isCollapse"></MenuLogo>
+  <MenuLogo></MenuLogo>
   <el-menu
     :default-active="activeIndex"
     class="el-menu-vertical-demo"
@@ -20,6 +20,7 @@ import { useRoute } from 'vue-router';
 import {useStore} from '@/store/index'
 import MenuItem from './MenuItem.vue';
 import MenuLogo from './MenuLogo.vue'
+
 let menuList = reactive([
   {
     path: "/home",
@@ -76,7 +77,7 @@ let menuList = reactive([
     name: "network",
     meta: {
       title: "网络管理",
-      icon: "ZoomOut",
+      icon: "Connection",
       roles: ["sys:goods"],
       parentId: 0
     },
@@ -93,6 +94,32 @@ let menuList = reactive([
       roles: ["sys:goods"],
       parentId: 0
     },
+    children:[
+      {
+        path: "/index",
+        component: "/user/index.vue",
+        alwaysShow: false,
+        name: "userindex",
+        meta: {
+          title: "角色管理",
+          icon: "ZoomOut",
+          roles: ["sys:dept"],
+          parentId: 17
+        }
+      },
+       {
+        path: "/my",
+        component: "/user/my.vue",
+        alwaysShow: false,
+        name: "my",
+        meta: {
+          title: "个人中心",
+          icon: "ZoomOut",
+          roles: ["sys:dept"],
+          parentId: 17
+        }
+      },
+    ],
 
   }
 ])

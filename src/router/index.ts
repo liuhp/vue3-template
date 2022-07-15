@@ -18,6 +18,13 @@ const routes: Array<RouteRecordRaw> = [
         }
 
       },
+    ]
+  },
+  {
+    path: '/vm',
+    name: 'vm',
+    component: Layout,
+    children:[
       {
         path:'/vm',
         component: () => import('@/views/vm/index.vue'),
@@ -28,6 +35,13 @@ const routes: Array<RouteRecordRaw> = [
         }
 
       },
+    ]
+  },
+  {
+    path: '/mirror',
+    name: 'mirror',
+    component: Layout,
+    children:[
       {
         path:'/mirror',
         component: () => import('@/views/mirror/index.vue'),
@@ -38,6 +52,13 @@ const routes: Array<RouteRecordRaw> = [
         }
 
       },
+    ]
+  },
+  {
+    path: '/spec',
+    name: 'spec',
+    component: Layout,
+    children:[
       {
         path:'/spec',
         component: () => import('@/views/spec/index.vue'),
@@ -46,8 +67,14 @@ const routes: Array<RouteRecordRaw> = [
           title:'规格管理',
           icon:'#home'
         }
-
       },
+    ]
+  },
+  {
+    path: '/network',
+    name: 'network',
+    component: Layout,
+    children:[
       {
         path:'/network',
         component: () => import('@/views/network/index.vue'),
@@ -56,30 +83,36 @@ const routes: Array<RouteRecordRaw> = [
           title:'网络管理',
           icon:'#home'
         }
+
       },
+    ]
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: Layout,
+    children:[
       {
-        path:'/user',
-        // component: () => import('@/views/user/index.vue'),
+        path:'/index',
+        component: () => import('@/views/user/index.vue'),
         name:'user',
         meta:{
           title:'用户管理',
           icon:'#home'
         },
-        children:[
-          {
-            path:'/user-manage',
-            component: () => import('@/views/user/index.vue'),
-            name:'network',
-            meta:{
-              title:'网络管理',
-              icon:'#home'
-            }
-    
-          },
-        ],
+      },
+      {
+        path:'/my',
+        component: () => import('@/views/user/my.vue'),
+        name:'my',
+        meta:{
+          title:'个人中心',
+          icon:'#home'
+        }
+
       },
     ]
-  }
+  },
   
 ]
 // 创建

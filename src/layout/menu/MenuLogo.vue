@@ -1,9 +1,20 @@
 <template>
   <div class="logo">
     <img src="../../assets/images/logo.png" alt="logo"/>
-    <span class="title">LOGO</span>
+    <span v-if="!isCollapse" class="title">LOGO</span>
   </div>
 </template>
+<script lang="ts" setup>
+import { defineProps, computed } from 'vue';
+import {useStore} from '@/store/index'
+
+const store = useStore()
+const isCollapse = computed(()=>{
+  return store.getters['getCollapse']
+})
+
+
+</script>
 <style lang="scss" scoped>
 .logo{
   background-color: #2b2f3a;

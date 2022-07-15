@@ -1,5 +1,5 @@
 <template>
-<div>lalalla</div>
+  <div>spec</div>
 </template>
 <script lang="ts">
 </script>

@@ -27,4 +27,7 @@ const changeIcon = () => {
   cursor: pointer;
   margin-right: 15px;
 }
+.icons:hover{
+  color: #286cff;
+}
 </style>
