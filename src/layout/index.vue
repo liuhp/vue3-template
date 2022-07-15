@@ -1,14 +1,15 @@
 <template>
   <el-container class="layout">
-    <el-aside class="asside">
-     <MenuBar></MenuBar>
+    <el-aside width="auto" class="asside">
+      <MenuBar></MenuBar>
     </el-aside>
     <el-container>
       <el-header class="header">
-       <Header></Header>
+        <Header></Header>
       </el-header>
       <el-main class="main">
-        main
+        <Tabs></Tabs>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -24,15 +25,17 @@ import Tabs from './tabs/Tabs.vue';
 .layout {
   height: 100%;
   .asside {
-    background-color: aqua;
+    background-color: rgb(48, 65, 86);
   }
   .header {
-    background-color: aquamarine;
-
+    height: 50px;
+    border-bottom:1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
   }
   .main {
-    background-color: aliceblue;
-   
+    padding-top: 0;
+    // background-color: darkgray;
   }
 }
 </style>

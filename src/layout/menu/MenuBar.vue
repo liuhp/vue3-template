@@ -22,102 +22,77 @@ import MenuItem from './MenuItem.vue';
 import MenuLogo from './MenuLogo.vue'
 let menuList = reactive([
   {
-    path: "/dashboard",
+    path: "/home",
     component: "Layout",
     meta: {
-      title: "首页",
-      icon: "Watch",
+      title: "概览",
+      icon: "House",
       roles: ["sys:manage"]
     },
     children: []
   },
   {
-    path: "/system",
+    path: "/vm",
     component: "Layout",
     alwaysShow: true,
-    name: "system",
+    name: "vm",
     meta: {
-      title: "系统管理",
-      icon: "Menu",
+      title: "虚机管理",
+      icon: "Monitor",
       roles: ["sys:manage"],
       parentId: 0
     },
-    children: [
-      {
-        path: "/department",
-        component: "/system/department/department",
-        alwaysShow: false,
-        name: "department",
-        meta: {
-          title: "机构管理",
-          icon: "ZoomOut",
-          roles: ["sys:dept"],
-          parentId: 17
-        }
-      },
-      {
-        path: "/userList",
-        component: "/system/User/UserList",
-        alwaysShow: false,
-        name: "userList",
-        meta: {
-          title: "用户管理",
-          icon: "ZoomOut",
-          roles: ["sys:user"],
-          parentId: 17
-        }
-      },
-      {
-        path: "/roleList",
-        component: "/system/Role/RoleList",
-        alwaysShow: false,
-        name: "roleList",
-        meta: {
-          title: "角色管理",
-          icon: "ZoomOut",
-          roles: ["sys:role"],
-          parentId: 17
-        }
-      },
-      {
-        path: "/menuList",
-        component: "/system/Menu/MenuList",
-        alwaysShow: false,
-        name: "menuList",
-        meta: {
-          title: "权限管理",
-          icon: "ZoomOut",
-          roles: ["sys:menu"],
-          parentId: 17
-        }
-      }
-    ]
   },
   {
-    path: "/goods",
+    path: "/mirror",
     component: "Layout",
     alwaysShow: true,
-    name: "goods",
+    name: "mirror",
     meta: {
-      title: "商品管理",
+      title: "镜像管理",
+      icon: "MostlyCloudy",
+      roles: ["sys:goods"],
+      parentId: 0
+    },
+
+  },
+  {
+    path: "/spec",
+    component: "Layout",
+    alwaysShow: true,
+    name: "spec",
+    meta: {
+      title: "规格管理",
+      icon: "Orange",
+      roles: ["sys:goods"],
+      parentId: 0
+    },
+
+  },
+  {
+    path: "/network",
+    component: "Layout",
+    alwaysShow: true,
+    name: "network",
+    meta: {
+      title: "网络管理",
       icon: "ZoomOut",
       roles: ["sys:goods"],
       parentId: 0
     },
-    children: [
-      {
-        path: "/goodCategory",
-        component: "/goods/goodsCategory/goodsCategoryList",
-        alwaysShow: false,
-        name: "goodCategory",
-        meta: {
-          title: "商品分类",
-          icon: "ZoomOut",
-          roles: ["sys:goodsCategory"],
-          parentId: 34
-        }
-      }
-    ]
+
+  },
+  {
+    path: "/user",
+    component: "Layout",
+    alwaysShow: true,
+    name: "user",
+    meta: {
+      title: "用户管理",
+      icon: "User",
+      roles: ["sys:goods"],
+      parentId: 0
+    },
 
   }
 ])
