@@ -91,18 +91,23 @@ const routes: Array<RouteRecordRaw> = [
     path: '/user',
     name: 'user',
     component: Layout,
+    redirect: "/user/index",
+    meta:{
+      title:'用户管理',
+      icon:'#home'
+    },
     children:[
       {
-        path:'/index',
+        path:'/user/index',
         component: () => import('@/views/user/index.vue'),
         name:'user',
         meta:{
-          title:'用户管理',
+          title:'角色管理',
           icon:'#home'
         },
       },
       {
-        path:'/my',
+        path:'/user/my',
         component: () => import('@/views/user/my.vue'),
         name:'my',
         meta:{

@@ -8,7 +8,7 @@
         <Header></Header>
       </el-header>
       <el-main class="main">
-        <!-- <Tabs></Tabs> -->
+        <Tabs></Tabs>
         <router-view></router-view>
       </el-main>
     </el-container>

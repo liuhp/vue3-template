@@ -1,5 +1,5 @@
 <template>
-  <MenuLogo></MenuLogo>
+  <MenuLogo class="layout-logo"></MenuLogo>
   <el-menu
     :default-active="activeIndex"
     class="el-menu-vertical-demo"
@@ -96,7 +96,7 @@ let menuList = reactive([
     },
     children:[
       {
-        path: "/index",
+        path: "/user/index",
         component: "/user/index.vue",
         alwaysShow: false,
         name: "userindex",
@@ -108,7 +108,7 @@ let menuList = reactive([
         }
       },
        {
-        path: "/my",
+        path: "/user/my",
         component: "/user/my.vue",
         alwaysShow: false,
         name: "my",
@@ -144,6 +144,19 @@ const handleClose = (key: string | number, keyPath: string[]) => {
 </script>
 
 <style lang="scss" scoped>
+@keyframes logoAnimation {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+} 100% {
+        transform: scale(1);
+    }
+}
+.layout-logo {
+    animation: logoAnimation 1s ease-out;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 230px;
   min-height: 400px;

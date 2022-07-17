@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item v-for="item in tabs" :to="{ path: item.path }">{{item.meta.title}}</el-breadcrumb-item>
+    <el-breadcrumb-item v-for="item in tabs" >{{item.meta.title}}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
@@ -12,11 +12,13 @@ const tabs :Ref<RouteLocationMatched[]> = ref([])
 
 const route = useRoute()
 const getBreadCom = () => {
+  
   let mached = route.matched.filter(item => item.meta && item.meta.title)
   //判断第一个是否是首页,如果不是 构造一个
   const first = mached[0]
-  if (first.path !== '/dashboard') {
-    mached = [{ path: '/dashboard', meta: { title: '首页' } } as any].concat(mached)
+  console.log('first', first)
+  if (first.path !== '/home') {
+    mached = [{ path: '/home', meta: { title: '概览' } } as any].concat(mached)
   }
   tabs.value = mached
 }

@@ -25,8 +25,8 @@ const setActiveTab = () => {
 
 //删除选项卡
 const removeTab = (targetName: string) => {
-  if(targetName === '/dashboard') return
-  if(store.state.tabsList.length === 1) return
+  if(targetName === '/home') return
+  if(store.state.tabList.length === 1) return
   //选项卡数据
   const tabs = tabsList.value
   let activeName = activeTab.value
@@ -43,7 +43,7 @@ const removeTab = (targetName: string) => {
   //重新设置当前激活的选项卡
   activeTab.value = activeName
   //重新设置选项卡数据
-  store.state.tabsList = tabs.filter((tab: ITabe) => tab.path !== targetName)
+  store.state.tabList = tabs.filter((tab: ITabe) => tab.path !== targetName)
   //跳转路由
   router.push({path:activeName})
 }
@@ -62,7 +62,7 @@ const addTab = () => {
     path: path,
     title: meta.title as string
   }
-  store.commit('addTabe', tab)
+  store.commit('addTab', tab)
 }
 
 //监听路由的变化
@@ -82,7 +82,8 @@ const beforRefresh =  () =>{
   if(tabSession){
     let oldTabs = JSON.parse(tabSession)
     if(oldTabs.length>0){
-      store.state.tabsList = oldTabs
+      // ToDo： 在store中操作
+      store.state.tabList = oldTabs
     }
   }
 }
@@ -95,5 +96,35 @@ onMounted(()=>{
 
 </script>
 
-<style lang='scss' scoped>
+<style scoped lang='scss'>
+:deep(.el-tabs__header) {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+}
+:deep(.el-tabs__item) {
+    height: 26px !important;
+    line-height: 26px !important;
+    text-align: center !important;
+    border: 1px solid #d8dce5 !important;
+    margin: 0px 3px !important;
+    color: #495060;
+    font-size: 12px !important;
+    padding: 0xp 10px !important;
+}
+:deep(.el-tabs__nav) {
+    border: none !important;
+}
+:deep(.is-active) {
+    border-bottom: 1px solid transparent !important;
+    border: 1px solid #42b983 !important;
+    background-color: #42b983 !important;
+    color: #fff !important;
+}
+:deep(.el-tabs__item:hover) {
+    color: #495060 !important;
+}
+:deep(.is-active:hover) {
+    color: #fff !important;
+}
 </style>
