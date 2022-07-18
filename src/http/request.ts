@@ -252,6 +252,28 @@ class request {
       responseType: "arraybuffer",
     })
   }
+
+  login<T = any>(url: string, params: any): Promise<Result<T>> {
+    return new Promise((resolve, reject) => {
+      this.instance
+        .post<T>(url, params, {
+          transformRequest: [
+            (params) => {
+              return qs.stringify(params)
+            },
+          ],
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+        .then((res) => {
+          resolve(res as any)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  }
 }
 
 export default request

@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form
-      ref="loginForm"
+      ref="loginFormRef"
       class="login-form"
       :model="loginModel"
       :rules="rules"
@@ -23,7 +23,7 @@
           auto-complete="on"
         />
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
          <span class="svg-container">
           <el-icon><Unlock /></el-icon>
         </span>
@@ -43,7 +43,7 @@
       </el-form-item>
       <el-row style="width: 100%;">
           <el-col :span="16">
-            <el-form-item>
+            <el-form-item prop="code">
               <span class="svg-container">
                 <el-icon><Key /></el-icon>
               </span>
@@ -59,7 +59,7 @@
         </el-row>
       <el-form-item>
         <el-button class="mybtn" type="primary" size="default"
-          @click.native.prevent="handleLogin">登 录</el-button>
+          @click.native.prevent="login">登 录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -67,17 +67,19 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue"
 import useImage from '@/composables/login/useImage';
+import useBaseLogin from '@/composables/login/useBaseLogin';
+import useLogin from '@/composables/login/useLogin';
 
 //验证码
 const {imgSrc,getImage} = useImage();
-const loginModel = reactive({
-  username: "",
-  password: "",
-  code: "",
-  
-})
+//登录基础数据
+const {loginModel, rules, loginFormRef} = useBaseLogin()
+
+//登录提交
+const {login} = useLogin(loginModel);
+
 const passwordType = ref('password') 
-const rules = reactive([])
+
 const showPwd = () => {
       if (passwordType.value === 'password') {
         passwordType.value = ''
