@@ -101,6 +101,11 @@ onMounted(()=>{
     margin: 0px;
     display: flex;
     align-items: center;
+    margin: 0 -20px;
+  background: rgba(0,0,0,0.05);
+}
+:deep(.el-tabs__nav-wrap){
+  padding: 0 20px;
 }
 :deep(.el-tabs__item) {
     height: 26px !important;
@@ -111,6 +116,7 @@ onMounted(()=>{
     color: #495060;
     font-size: 12px !important;
     padding: 0xp 10px !important;
+    background: #fff;
 }
 :deep(.el-tabs__nav) {
     border: none !important;

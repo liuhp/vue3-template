@@ -28,4 +28,7 @@ watch(()=>route.path,()=>getBreadCom())
 </script>
 
 <style lang='scss' scoped>
+:deep(.el-breadcrumb__inner){
+  color: rgb(244, 244, 245) !important;
+}
 </style>

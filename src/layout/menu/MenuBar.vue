@@ -27,7 +27,7 @@ let menuList = reactive([
     component: "Layout",
     meta: {
       title: "概览",
-      icon: "House",
+      icon: "HomeFilled",
       roles: ["sys:manage"]
     },
     children: []
@@ -39,7 +39,7 @@ let menuList = reactive([
     name: "vm",
     meta: {
       title: "虚机管理",
-      icon: "Monitor",
+      icon: "Platform",
       roles: ["sys:manage"],
       parentId: 0
     },

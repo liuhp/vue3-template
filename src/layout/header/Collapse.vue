@@ -23,11 +23,12 @@ const changeIcon = () => {
   display: flex;
   align-items: center;
   font-size: 40px;
-  color: #303133;
+  // color: #303133;
+  color: rgb(244, 244, 245);
   cursor: pointer;
   margin-right: 15px;
 }
 .icons:hover{
-  color: #286cff;
+  color: #409eff;
 }
 </style>
