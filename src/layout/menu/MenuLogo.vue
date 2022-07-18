@@ -10,7 +10,7 @@ import {useStore} from '@/store/index'
 
 const store = useStore()
 const isCollapse = computed(()=>{
-  return store.getters['getCollapse']
+  return store.getters['menu/getCollapse']
 })
 
 

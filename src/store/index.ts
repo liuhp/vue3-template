@@ -1,42 +1,29 @@
 // store.ts
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import ITAB from './type/index'
-
-export interface State {
-  collapse: boolean,
-  tabList: Array<ITAB>,
-
+import tabs,{TabsState} from '../store/modules/tabs'
+import menu,{MenuState} from '../store/modules/menu'
+import user,{UserState} from '../store/modules/user'
+import { CommonStore } from './help'
+//是一种规范
+export type RootState = {
+    tabs:TabsState,
+    menu:MenuState,
+    user:UserState
 }
+//导入所有的模块
+export const modules = {
+    tabs,
+    menu,
+    user,
+}
+export const key: InjectionKey<Store<RootState>> = Symbol()
 
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export const store = createStore<State>({
-  state: {
-    collapse: false,
-    tabList: [],
-  },
-  mutations: {
-    setCollapse(state: State, collapse: boolean){
-      state.collapse = collapse
-    },
-    addTab(state: State, tab: ITAB ){
-      if(state.tabList.some(item => item.path === tab.path)) return
-      state.tabList.push(tab)
-    },
-  },
-  getters: {
-    getCollapse(state: State){
-      return state.collapse
-    },
-    //获取tabs
-    getTabs: (state: State) => {
-      return state.tabList;
-  }
-  }
-})
+export const store = createStore<RootState>({
+    modules
+}) as CommonStore
 
 // 定义自己的 `useStore` 组合式函数
-export function useStore () {
-  return baseUseStore(key)
+export function useStore(){
+    return baseUseStore(key) as CommonStore
 }

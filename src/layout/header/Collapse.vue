@@ -10,11 +10,11 @@ import {useStore} from '@/store/index'
 
 const store = useStore()
 const status = computed(()=>{
-  return store.getters['getCollapse']
+  return store.getters['menu/getCollapse']
 })
 const changeIcon = () => {
   // status.value = !status.value
-  store.commit('setCollapse',!status.value)
+  store.commit('menu/setCollapse',!status.value)
 }
 </script>
 

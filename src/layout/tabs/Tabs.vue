@@ -15,7 +15,7 @@ const router = useRouter()
 
 // 获取tabs数据
 const tabsList = computed(() => {
-  return store.getters['getTabs']
+  return store.getters['tabs/getTabs']
 })
 //当前激活的选项卡
 const activeTab = ref('2')
@@ -26,7 +26,7 @@ const setActiveTab = () => {
 //删除选项卡
 const removeTab = (targetName: string) => {
   if(targetName === '/home') return
-  if(store.state.tabList.length === 1) return
+  if(store.state.tabs.tabList.length === 1) return
   //选项卡数据
   const tabs = tabsList.value
   let activeName = activeTab.value
@@ -43,7 +43,7 @@ const removeTab = (targetName: string) => {
   //重新设置当前激活的选项卡
   activeTab.value = activeName
   //重新设置选项卡数据
-  store.state.tabList = tabs.filter((tab: ITabe) => tab.path !== targetName)
+  store.state.tabs.tabList = tabs.filter((tab: ITabe) => tab.path !== targetName)
   //跳转路由
   router.push({path:activeName})
 }
@@ -62,7 +62,7 @@ const addTab = () => {
     path: path,
     title: meta.title as string
   }
-  store.commit('addTab', tab)
+  store.commit('tabs/addTab', tab)
 }
 
 //监听路由的变化
@@ -79,11 +79,11 @@ const beforRefresh =  () =>{
     sessionStorage.setItem('tabsView',JSON.stringify(tabsList.value))
   })
   let tabSession = sessionStorage.getItem('tabsView')
-  if(tabSession){
+  if(tabSession && tabSession.length){
     let oldTabs = JSON.parse(tabSession)
     if(oldTabs.length>0){
       // ToDo： 在store中操作
-      store.state.tabList = oldTabs
+      store.state.tabs.tabList = oldTabs
     }
   }
 }
