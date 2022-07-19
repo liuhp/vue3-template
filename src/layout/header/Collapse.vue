@@ -22,7 +22,7 @@ const changeIcon = () => {
 .icons {
   display: flex;
   align-items: center;
-  font-size: 40px;
+  font-size: 36px;
   // color: #303133;
   color: rgb(244, 244, 245);
   cursor: pointer;

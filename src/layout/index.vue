@@ -32,6 +32,7 @@ import Tabs from './tabs/Tabs.vue';
     border-bottom:1px solid #e5e5e5;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #2b2f3a;
   }
   .main {

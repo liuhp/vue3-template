@@ -17,7 +17,7 @@ const getBreadCom = () => {
   //判断第一个是否是首页,如果不是 构造一个
   const first = mached[0]
   console.log('first', first)
-  if (first.path !== '/home') {
+  if (first && first.path !== '/home') {
     mached = [{ path: '/home', meta: { title: '概览' } } as any].concat(mached)
   }
   tabs.value = mached
