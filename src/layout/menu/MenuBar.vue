@@ -5,125 +5,35 @@
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
     background-color="#000"
-    @open="handleOpen"
-    @close="handleClose"
     router
   >
-    <MenuItem :menuList="menuList"></MenuItem>
+    <MenuItem :menuList="state.menus"></MenuItem>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
 // setup 语法糖中 定义的数据和方法,直接可以在模板中使用,无需return
-import { ref, reactive, computed } from "vue"
+import { reactive, computed, onMounted } from "vue"
 import { useRoute } from "vue-router"
 import { useMenuStore } from "@/store/menu"
+import { routes } from "@/router/index"
 import MenuItem from "./MenuItem.vue"
 import MenuLogo from "./MenuLogo.vue"
 
-let menuList = reactive([
-  {
-    path: "/home",
-    component: "Layout",
-    meta: {
-      title: "概览",
-      icon: "HomeFilled",
-      roles: ["sys:manage"],
-    },
-    children: [],
-  },
-  {
-    path: "/vm",
-    component: "Layout",
-    alwaysShow: true,
-    name: "vm",
-    meta: {
-      title: "虚机管理",
-      icon: "Platform",
-      roles: ["sys:manage"],
-      parentId: 0,
-    },
-  },
-  {
-    path: "/mirror",
-    component: "Layout",
-    alwaysShow: true,
-    name: "mirror",
-    meta: {
-      title: "镜像管理",
-      icon: "MostlyCloudy",
-      roles: ["sys:goods"],
-      parentId: 0,
-    },
-  },
-  {
-    path: "/spec",
-    component: "Layout",
-    alwaysShow: true,
-    name: "spec",
-    meta: {
-      title: "规格管理",
-      icon: "Orange",
-      roles: ["sys:goods"],
-      parentId: 0,
-    },
-  },
-  {
-    path: "/network",
-    component: "Layout",
-    alwaysShow: true,
-    name: "network",
-    meta: {
-      title: "网络管理",
-      icon: "Connection",
-      roles: ["sys:goods"],
-      parentId: 0,
-    },
-  },
-  {
-    path: "/user",
-    component: "Layout",
-    alwaysShow: true,
-    name: "user",
-    meta: {
-      title: "用户管理",
-      icon: "User",
-      roles: ["sys:goods"],
-      parentId: 0,
-    },
-    children: [
-      {
-        path: "/user/index",
-        component: "/user/index.vue",
-        alwaysShow: false,
-        name: "userindex",
-        meta: {
-          title: "角色管理",
-          icon: "ZoomOut",
-          roles: ["sys:dept"],
-          parentId: 17,
-        },
-      },
-      {
-        path: "/user/my",
-        component: "/user/my.vue",
-        alwaysShow: false,
-        name: "my",
-        meta: {
-          title: "个人中心",
-          icon: "ZoomOut",
-          roles: ["sys:dept"],
-          parentId: 17,
-        },
-      },
-    ],
-  },
-])
+const state = reactive({
+  menus: [] as any[],
+})
+onMounted(() => {
+  state.menus = handleRoutes(routes)
+})
 
 //获得当前路由
 const route = useRoute()
 const activeIndex = computed(() => {
-  const { path } = route
+  const { meta, path } = route
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
   return path
 })
 
@@ -131,11 +41,51 @@ const menuStore = useMenuStore()
 const isCollapse = computed(() => {
   return menuStore.getCollapse
 })
-const handleOpen = (key: string | number, keyPath: string[]) => {
-  console.log(key, keyPath)
+
+const setObjProperties = (target: object, source: any) => {
+  Object.entries(source).forEach(([key, value]) => {
+    if (value || typeof value !== "undefined") {
+      target[key] = value
+    }
+  })
 }
-const handleClose = (key: string | number, keyPath: string[]) => {
-  console.log(key, keyPath)
+
+// 处理路由
+const handleRoutes = (routes: Array<any>) => {
+  // 递归处理路由
+  const routers = []
+  for (let i = 0; i < routes.length; i++) {
+    const { redirect, path, meta, children = [] } = routes[i]
+    const hidden = meta?.hidden ? meta.hidden : false
+    if (hidden) {
+      continue
+    } // 隐藏的菜单
+    // copy route
+    const metaCopy = { ...meta }
+    const router = { path, meta: metaCopy, children }
+    // 复制属性
+    setObjProperties(router, {
+      redirect,
+    })
+    // todo 权限判断
+
+    // 子菜单
+    const subChildren = children.filter((item: any) => !item.meta?.hidden)
+    // todo: showByOneChildren用于拓展，是否只展示一个子菜单
+    // const showByOneChildren = meta?.showByOneChildren?  meta?.showByOneChildren: false
+    if (subChildren && subChildren.length) {
+      if (subChildren.length === 1) {
+        metaCopy.type = "menu" // 没有子菜单
+      } else {
+        metaCopy.type = "submenu" // 下面还能展开菜单
+      }
+      router.children = handleRoutes(subChildren)
+    } else {
+      metaCopy.type = "menu"
+    }
+    routers.push(router)
+  }
+  return routers
 }
 </script>
 
@@ -155,7 +105,7 @@ const handleClose = (key: string | number, keyPath: string[]) => {
   animation: logoAnimation 1s ease-out;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 230px;
+  width: 200px;
   min-height: 400px;
 }
 .el-menu {
@@ -169,15 +119,15 @@ const handleClose = (key: string | number, keyPath: string[]) => {
 :deep(.el-menu .el-menu-item) {
   color: #bfcbd9;
 }
+:deep(.is-opened .el-menu-item) {
+  // background-color: #1f2d3d !important;
+  background-color: #1a1a1a !important;
+}
 :deep(.el-menu-item.is-active) {
   color: #409eff !important;
   background-color: rgba(64, 158, 255, 0.2) !important;
 }
 
-:deep(.is-opened .el-menu-item) {
-  // background-color: #1f2d3d !important;
-  background-color: #1a1a1a !important;
-}
 :deep(.el-menu-item:hover) {
   color: #409eff !important;
   // background-color: #001528 !important;
