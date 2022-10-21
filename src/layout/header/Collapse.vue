@@ -1,24 +1,24 @@
 <template>
-  <el-icon class="icons"  @click="changeIcon">
+  <el-icon class="icons" @click="changeIcon">
     <component class="icons" :is="status ? 'expand' : 'fold'" />
   </el-icon>
 </template>
 
-<script lang='ts' setup>
-import { ref,computed } from 'vue'
-import {useStore} from '@/store/index'
+<script lang="ts" setup>
+import { ref, computed } from "vue"
+import { useMenuStore } from "@/store/menu"
 
-const store = useStore()
-const status = computed(()=>{
-  return store.getters['menu/getCollapse']
+const menuStore = useMenuStore()
+const status = computed(() => {
+  return menuStore.getCollapse
 })
 const changeIcon = () => {
   // status.value = !status.value
-  store.commit('menu/setCollapse',!status.value)
+  menuStore.setCollapse(!status.value)
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .icons {
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ const changeIcon = () => {
   cursor: pointer;
   margin-right: 15px;
 }
-.icons:hover{
+.icons:hover {
   color: #409eff;
 }
 </style>

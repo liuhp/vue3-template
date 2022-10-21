@@ -18,16 +18,16 @@
 
 <script lang="ts" setup>
 import { ref, reactive, computed, watch, onMounted } from "vue"
-import { useStore } from "@/store"
+import { useTabsStore } from "@/store/tabs"
 import { useRoute, useRouter } from "vue-router"
 import { ITabe } from "@/store/type"
-const store = useStore()
+const tabsStore = useTabsStore()
 const route = useRoute()
 const router = useRouter()
 
 // 获取tabs数据
 const tabsList = computed(() => {
-  return store.getters["tabs/getTabs"]
+  return tabsStore.getTabs
 })
 //当前激活的选项卡
 const activeTab = ref("2")
@@ -38,7 +38,7 @@ const setActiveTab = () => {
 //删除选项卡
 const removeTab = (targetName: string) => {
   if (targetName === "/home") return
-  if (store.state.tabs.tabList.length === 1) return
+  if (tabsStore.tabList.length === 1) return
   //选项卡数据
   const tabs = tabsList.value
   let activeName = activeTab.value
@@ -55,9 +55,7 @@ const removeTab = (targetName: string) => {
   //重新设置当前激活的选项卡
   activeTab.value = activeName
   //重新设置选项卡数据
-  store.state.tabs.tabList = tabs.filter(
-    (tab: ITabe) => tab.path !== targetName
-  )
+  tabsStore.tabList = tabs.filter((tab: ITabe) => tab.path !== targetName)
   //跳转路由
   router.push({ path: activeName })
 }
@@ -76,7 +74,7 @@ const addTab = () => {
     path: path,
     title: meta.title as string,
   }
-  store.commit("tabs/addTab", tab)
+  tabsStore.addTab(tab)
 }
 
 //监听路由的变化
@@ -100,7 +98,7 @@ const beforRefresh = () => {
     let oldTabs = JSON.parse(tabSession)
     if (oldTabs.length > 0) {
       // ToDo： 在store中操作
-      store.state.tabs.tabList = oldTabs
+      tabsStore.tabList = oldTabs
     }
   }
 }

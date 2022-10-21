@@ -5,12 +5,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineProps, computed } from "vue"
-import { useStore } from "@/store/index"
+import { computed } from "vue"
+import { useMenuStore } from "@/store/menu"
 
-const store = useStore()
+const menuStore = useMenuStore()
 const isCollapse = computed(() => {
-  return store.getters["menu/getCollapse"]
+  return menuStore.getCollapse
 })
 </script>
 <style lang="scss" scoped>

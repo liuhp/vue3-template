@@ -17,7 +17,7 @@
 // setup 语法糖中 定义的数据和方法,直接可以在模板中使用,无需return
 import { ref, reactive, computed } from "vue"
 import { useRoute } from "vue-router"
-import { useStore } from "@/store/index"
+import { useMenuStore } from "@/store/menu"
 import MenuItem from "./MenuItem.vue"
 import MenuLogo from "./MenuLogo.vue"
 
@@ -127,9 +127,9 @@ const activeIndex = computed(() => {
   return path
 })
 
-const store = useStore()
+const menuStore = useMenuStore()
 const isCollapse = computed(() => {
-  return store.getters["menu/getCollapse"]
+  return menuStore.getCollapse
 })
 const handleOpen = (key: string | number, keyPath: string[]) => {
   console.log(key, keyPath)
