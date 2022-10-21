@@ -4,7 +4,7 @@
     :default-active="activeIndex"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
-    background-color="#304156"
+    background-color="#000"
     @open="handleOpen"
     @close="handleClose"
     router
@@ -13,13 +13,13 @@
   </el-menu>
 </template>
 
-<script  lang="ts" setup>
+<script lang="ts" setup>
 // setup 语法糖中 定义的数据和方法,直接可以在模板中使用,无需return
-import { ref, reactive, computed } from 'vue'
-import { useRoute } from 'vue-router';
-import {useStore} from '@/store/index'
-import MenuItem from './MenuItem.vue';
-import MenuLogo from './MenuLogo.vue'
+import { ref, reactive, computed } from "vue"
+import { useRoute } from "vue-router"
+import { useStore } from "@/store/index"
+import MenuItem from "./MenuItem.vue"
+import MenuLogo from "./MenuLogo.vue"
 
 let menuList = reactive([
   {
@@ -28,9 +28,9 @@ let menuList = reactive([
     meta: {
       title: "概览",
       icon: "HomeFilled",
-      roles: ["sys:manage"]
+      roles: ["sys:manage"],
     },
-    children: []
+    children: [],
   },
   {
     path: "/vm",
@@ -41,7 +41,7 @@ let menuList = reactive([
       title: "虚机管理",
       icon: "Platform",
       roles: ["sys:manage"],
-      parentId: 0
+      parentId: 0,
     },
   },
   {
@@ -53,9 +53,8 @@ let menuList = reactive([
       title: "镜像管理",
       icon: "MostlyCloudy",
       roles: ["sys:goods"],
-      parentId: 0
+      parentId: 0,
     },
-
   },
   {
     path: "/spec",
@@ -66,9 +65,8 @@ let menuList = reactive([
       title: "规格管理",
       icon: "Orange",
       roles: ["sys:goods"],
-      parentId: 0
+      parentId: 0,
     },
-
   },
   {
     path: "/network",
@@ -79,9 +77,8 @@ let menuList = reactive([
       title: "网络管理",
       icon: "Connection",
       roles: ["sys:goods"],
-      parentId: 0
+      parentId: 0,
     },
-
   },
   {
     path: "/user",
@@ -92,9 +89,9 @@ let menuList = reactive([
       title: "用户管理",
       icon: "User",
       roles: ["sys:goods"],
-      parentId: 0
+      parentId: 0,
     },
-    children:[
+    children: [
       {
         path: "/user/index",
         component: "/user/index.vue",
@@ -104,10 +101,10 @@ let menuList = reactive([
           title: "角色管理",
           icon: "ZoomOut",
           roles: ["sys:dept"],
-          parentId: 17
-        }
+          parentId: 17,
+        },
       },
-       {
+      {
         path: "/user/my",
         component: "/user/my.vue",
         alwaysShow: false,
@@ -116,24 +113,23 @@ let menuList = reactive([
           title: "个人中心",
           icon: "ZoomOut",
           roles: ["sys:dept"],
-          parentId: 17
-        }
+          parentId: 17,
+        },
       },
     ],
-
-  }
+  },
 ])
 
 //获得当前路由
 const route = useRoute()
-const activeIndex = computed(()=>{
-  const {path} = route
+const activeIndex = computed(() => {
+  const { path } = route
   return path
 })
 
 const store = useStore()
-const isCollapse = computed(()=>{
-  return store.getters['menu/getCollapse']
+const isCollapse = computed(() => {
+  return store.getters["menu/getCollapse"]
 })
 const handleOpen = (key: string | number, keyPath: string[]) => {
   console.log(key, keyPath)
@@ -145,39 +141,45 @@ const handleClose = (key: string | number, keyPath: string[]) => {
 
 <style lang="scss" scoped>
 @keyframes logoAnimation {
-    0% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(1);
-} 100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .layout-logo {
-    animation: logoAnimation 1s ease-out;
+  animation: logoAnimation 1s ease-out;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 230px;
   min-height: 400px;
 }
-.el-menu{
+.el-menu {
   border-right: none;
+  background-color: #141414 !important;
 }
-:deep(.el-sub-menu .el-sub-menu__title){
+:deep(.el-sub-menu .el-sub-menu__title) {
   color: #f4f4f5 !important;
+  background-color: #141414 !important;
 }
-:deep(.el-menu .el-menu-item){
+:deep(.el-menu .el-menu-item) {
   color: #bfcbd9;
 }
-:deep(.el-menu-item.is-active){
+:deep(.el-menu-item.is-active) {
   color: #409eff !important;
-}
-:deep(.is-opened .el-menu-item){
-  background-color: #1f2d3d !important;
-}
-:deep(.el-menu-item:hover){
-  background-color: #001528 !important;
+  background-color: rgba(64, 158, 255, 0.2) !important;
 }
 
+:deep(.is-opened .el-menu-item) {
+  // background-color: #1f2d3d !important;
+  background-color: #1a1a1a !important;
+}
+:deep(.el-menu-item:hover) {
+  color: #409eff !important;
+  // background-color: #001528 !important;
+}
 </style>
