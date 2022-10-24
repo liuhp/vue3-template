@@ -5,7 +5,8 @@
       class="login-form"
       :model="loginModel"
       :rules="rules"
-      :inline="false">
+      :inline="false"
+    >
       <div class="title-container">
         <h3 class="title">系统登录</h3>
       </div>
@@ -24,7 +25,7 @@
         />
       </el-form-item>
       <el-form-item prop="password">
-         <span class="svg-container">
+        <span class="svg-container">
           <el-icon><Unlock /></el-icon>
         </span>
         <el-input
@@ -38,10 +39,13 @@
           auto-complete="on"
         />
         <span class="show-pwd" @click="showPwd">
-          <component class="icons" :is="passwordType === 'password' ? 'Hide' : 'View'" />
+          <component
+            class="icons"
+            :is="passwordType === 'password' ? 'Hide' : 'View'"
+          />
         </span>
       </el-form-item>
-      <el-row style="width: 100%;">
+      <!-- <el-row style="width: 100%;">
           <el-col :span="16">
             <el-form-item prop="code">
               <span class="svg-container">
@@ -56,47 +60,48 @@
           <el-col class="image-wrapper" :span="8">
             <img :src='imgSrc' @click="getImage" />
           </el-col>
-        </el-row>
+        </el-row> -->
       <el-form-item>
-        <el-button class="mybtn" type="primary" size="default"
-          @click.native.prevent="login">登 录</el-button>
+        <el-button
+          class="mybtn"
+          type="primary"
+          size="default"
+          @click.native.prevent="login"
+          >登 录</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, reactive } from "vue"
-import useImage from '@/composables/login/useImage';
-import useBaseLogin from '@/composables/login/useBaseLogin';
-import useLogin from '@/composables/login/useLogin';
+// import useImage from '@/composables/login/useImage';
+import useBaseLogin from "@/composables/login/useBaseLogin"
+import useLogin from "@/composables/login/useLogin"
 
 //验证码
-const {imgSrc,getImage} = useImage();
+// const {imgSrc,getImage} = useImage();
 //登录基础数据
-const {loginModel, rules, loginFormRef} = useBaseLogin()
+const { loginModel, rules, loginFormRef } = useBaseLogin()
 
 //登录提交
-const {login} = useLogin(loginModel);
+const { login } = useLogin(loginModel)
 
-const passwordType = ref('password') 
+const passwordType = ref("password")
 
 const showPwd = () => {
-      if (passwordType.value === 'password') {
-        passwordType.value = ''
-      } else {
-        passwordType.value = 'password'
-      }
-}
-
-const handleLogin = () => {
-
+  if (passwordType.value === "password") {
+    passwordType.value = ""
+  } else {
+    passwordType.value = "password"
+  }
 }
 </script>
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -111,18 +116,19 @@ $cursor: #fff;
     display: inline-block;
     height: 47px;
     width: 85%;
-    .el-input__wrapper{
+    .el-input__wrapper {
       width: 100%;
       border: none;
       background-color: transparent;
       box-shadow: none;
       padding: 0;
     }
-    .el-input__wrapper:hover{
+    .el-input__wrapper:hover {
       box-shadow: none;
     }
-    :deep(el-form-item:hover){
-      box-shadow: 0 0 0 1pxvar(--el-input-border-color,var(--el-border-color)) inset;
+    :deep(el-form-item:hover) {
+      box-shadow: 0 0 0 1pxvar (--el-input-border-color, var(--el-border-color))
+        inset;
       border: #eee;
     }
 
@@ -153,9 +159,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;
@@ -172,14 +178,13 @@ $light_gray:#eee;
     overflow: hidden;
   }
 
-
   .svg-container {
     padding: 2px 0 6px 15px;
     font-size: 16px;
     color: $dark_gray;
     vertical-align: middle;
     display: inline-block;
-    .el-icon{
+    .el-icon {
       vertical-align: middle;
     }
   }
@@ -201,13 +206,13 @@ $light_gray:#eee;
     color: #fff;
     cursor: pointer;
     user-select: none;
-    .icons{
+    .icons {
       width: 16px;
       height: 16px;
       color: $dark_gray;
     }
   }
-  .image-wrapper{
+  .image-wrapper {
     display: flex;
     justify-content: end;
     align-items: center;

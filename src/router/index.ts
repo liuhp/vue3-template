@@ -31,17 +31,6 @@ export const routes: Array<RouteRecordRaw> = [
           icon: "House",
         },
       },
-      {
-        path: "/home/detail",
-        component: () => import("@/views/home/detail.vue"),
-        name: "homeDetail",
-        meta: {
-          title: "资源池详情",
-          icon: "House",
-          activeMenu: "/home",
-          hidden: true, // 在左侧菜单中隐藏，默认不隐藏
-        },
-      },
     ],
   },
   {
@@ -65,17 +54,6 @@ export const routes: Array<RouteRecordRaw> = [
           activeMenu: "/vm",
         },
       },
-      {
-        path: "/vm/add",
-        component: () => import("@/views/vm/add-case.vue"),
-        name: "add-case",
-        meta: {
-          title: "新建实例",
-          icon: "#home",
-          activeMenu: "/vm",
-          hidden: true, // 在左侧菜单中隐藏，默认不隐藏
-        },
-      },
     ],
   },
   {
@@ -94,76 +72,6 @@ export const routes: Array<RouteRecordRaw> = [
         meta: {
           title: "镜像管理",
           icon: "MostlyCloudy",
-        },
-      },
-    ],
-  },
-  {
-    path: "/spec",
-    name: "spec",
-    component: Layout,
-    meta: {
-      title: "规格管理",
-      icon: "Orange",
-    },
-    children: [
-      {
-        path: "/spec",
-        component: () => import("@/views/spec/index.vue"),
-        name: "spec",
-        meta: {
-          title: "规格管理",
-          icon: "Orange",
-        },
-      },
-    ],
-  },
-  {
-    path: "/network",
-    name: "network",
-    component: Layout,
-    meta: {
-      title: "网络管理",
-      icon: "Connection",
-    },
-    children: [
-      {
-        path: "/network",
-        component: () => import("@/views/network/index.vue"),
-        name: "network",
-        meta: {
-          title: "网络管理",
-          icon: "Connection",
-        },
-      },
-    ],
-  },
-  {
-    path: "/log",
-    name: "log",
-    component: Layout,
-    redirect: "/log/business",
-    meta: {
-      title: "日志管理",
-      icon: "Document",
-    },
-    children: [
-      {
-        path: "/log/business",
-        component: () => import("@/views/log/business.vue"),
-        name: "business",
-        meta: {
-          title: "业务日志",
-          icon: "Tickets",
-        },
-      },
-      {
-        path: "/log/operate",
-        component: () => import("@/views/log/operate.vue"),
-        name: "operate",
-        meta: {
-          title: "操作日志",
-          icon: "SetUp",
         },
       },
     ],

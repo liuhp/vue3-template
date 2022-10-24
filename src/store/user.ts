@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
-import { loginApi } from "@/api/user/user"
+// import { loginApi } from "@/api/user/user"
 import { LoginParm } from "@/api/user/UserModel"
-import { Result } from "@/http/request"
+// import { Result } from "@/http/request"
 
 export type UserState = {
   token: string
@@ -22,17 +22,22 @@ export const useUserStore = defineStore("userStore", {
       this.userId = userId
     },
     login(loginParm: LoginParm) {
-      return new Promise<Result>((resolve, reject) => {
-        loginApi(loginParm)
-          .then((res) => {
-            if (res.data.code == 200) {
-              //存储到sessionStorage setToken(res.data.token) setUserId(res.data.id) setExpireTime(res.data.expireTime)
-            }
-            resolve(res)
-          })
-          .catch((error) => {
-            reject(error)
-          })
+      return new Promise((resolve, reject) => {
+        resolve({
+          data: {
+            code: 200,
+          },
+        })
+        // loginApi(loginParm)
+        //   .then((res) => {
+        //     if (res.data.code == 200) {
+        //       //存储到sessionStorage setToken(res.data.token) setUserId(res.data.id) setExpireTime(res.data.expireTime)
+        //     }
+        //     resolve(res)
+        //   })
+        //   .catch((error) => {
+        //     reject(error)
+        //   })
       })
     },
   },

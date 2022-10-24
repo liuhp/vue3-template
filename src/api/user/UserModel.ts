@@ -4,7 +4,7 @@
 export interface LoginParm {
   username: string
   password: string
-  code: string
+  // code: string
 }
 /**
  * 登录返回值

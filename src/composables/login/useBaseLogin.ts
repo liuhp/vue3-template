@@ -9,7 +9,7 @@ export default function useBaseLogin() {
   const loginModel = reactive<LoginParm>({
     username: "",
     password: "",
-    code: "",
+    // code: "",
   })
   //表单验证规则
   const rules = reactive({
@@ -27,13 +27,13 @@ export default function useBaseLogin() {
         message: "请填写登录密码",
       },
     ],
-    code: [
-      {
-        required: true,
-        trigger: "change",
-        message: "请填写验证码",
-      },
-    ],
+    // code: [
+    //   {
+    //     required: true,
+    //     trigger: "change",
+    //     message: "请填写验证码",
+    //   },
+    // ],
   })
   return {
     loginModel,

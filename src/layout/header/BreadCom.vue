@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch, Ref } from "vue"
+import { ref, watch, Ref } from "vue"
 import { RouteLocationMatched, useRoute } from "vue-router"
 // 定义面包屑导航数据
 const tabs: Ref<RouteLocationMatched[]> = ref([])

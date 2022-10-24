@@ -10,11 +10,9 @@ export default function useLogin(loginModel: LoginParm) {
   const login = () => {
     proxy.$refs.loginFormRef.validate(async (valid: boolean) => {
       if (valid) {
-        userStore.login(loginModel).then((res) => {
-          if (res.data.code == 200) {
-            //跳转首页
-            router.push({ path: "/" })
-          }
+        userStore.login(loginModel).then(() => {
+          console.log("login---")
+          router.push({ path: "/" })
         })
       }
     })

@@ -13,7 +13,6 @@ const status = computed(() => {
   return menuStore.getCollapse
 })
 const changeIcon = () => {
-  // status.value = !status.value
   menuStore.setCollapse(!status.value)
 }
 </script>
@@ -23,7 +22,6 @@ const changeIcon = () => {
   display: flex;
   align-items: center;
   font-size: 36px;
-  // color: #303133;
   color: rgb(244, 244, 245);
   cursor: pointer;
   margin-right: 15px;
