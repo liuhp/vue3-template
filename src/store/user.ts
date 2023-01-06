@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 // import { loginApi } from "@/api/user/user"
 import { LoginParm } from "@/api/user/UserModel"
 // import { Result } from "@/http/request"
+import { setToken } from "@/utils/auth"
 
 export type UserState = {
   token: string
@@ -23,6 +24,7 @@ export const useUserStore = defineStore("userStore", {
     },
     login(loginParm: LoginParm) {
       return new Promise((resolve, reject) => {
+        setToken("token")
         resolve({
           data: {
             code: 200,

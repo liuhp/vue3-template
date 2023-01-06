@@ -1,15 +1,14 @@
-// import http from "@/http/http"
+import { callApi } from "@/utils/https"
 // import {LoginParm, LoginResult } from './UserModel'
 
-enum Api {}
-// getImg = "/api/sysUser/image",
-// login = '/api/user/login'
 //获取验证码
-// export async function getImageApi() {
-//   return await http.getImage(Api.getImg)
-// }
+// export const getImageApi = ()=>callApi({
+//   url: 'sysUser/image',
+// })
 
 //登录
-// export async function loginApi(params: LoginParm) {
-//   return await http.login<LoginResult>(Api.login, params)
-//   }
+// export const loginApi = (data: LoginParm) =>callApi({
+//   url: 'user/login',
+//   data,
+//   method:'post',
+// })
