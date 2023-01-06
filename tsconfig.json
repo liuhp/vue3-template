@@ -12,6 +12,7 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true, // 解决打包报`vue-tsc --noEmit && vite build`的错,忽略所有的声明文件(*.d.ts)的类型检查
     "baseUrl": ".",
+    "suppressImplicitAnyIndexErrors":true,
     "paths": {
       "@/*":[
         "src/*"
@@ -21,5 +22,5 @@
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   // ts 排除的文件
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
