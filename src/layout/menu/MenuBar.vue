@@ -5,23 +5,22 @@
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
     background-color="#000"
-    router
-  >
+    router>
     <MenuItem :menuList="state.menus"></MenuItem>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
 // setup 语法糖中 定义的数据和方法,直接可以在模板中使用,无需return
-import { reactive, computed, onMounted } from "vue"
-import { useRoute } from "vue-router"
-import { useMenuStore } from "@/store/menu"
-import { routes } from "@/router/index"
-import MenuItem from "./MenuItem.vue"
-import MenuLogo from "./MenuLogo.vue"
+import { reactive, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useMenuStore } from '@/store/menu'
+import { routes } from '@/router/index'
+import MenuItem from './MenuItem.vue'
+import MenuLogo from './MenuLogo.vue'
 
 const state = reactive({
-  menus: [] as any[],
+  menus: [] as any[]
 })
 onMounted(() => {
   state.menus = handleRoutes(routes)
@@ -44,7 +43,7 @@ const isCollapse = computed(() => {
 
 const setObjProperties = (target: object, source: any) => {
   Object.entries(source).forEach(([key, value]) => {
-    if (value || typeof value !== "undefined") {
+    if (value || typeof value !== 'undefined') {
       target[key] = value
     }
   })
@@ -65,7 +64,7 @@ const handleRoutes = (routes: Array<any>) => {
     const router = { path, meta: metaCopy, children }
     // 复制属性
     setObjProperties(router, {
-      redirect,
+      redirect
     })
     // todo 权限判断
 
@@ -75,13 +74,13 @@ const handleRoutes = (routes: Array<any>) => {
     // const showByOneChildren = meta?.showByOneChildren?  meta?.showByOneChildren: false
     if (subChildren && subChildren.length) {
       if (subChildren.length === 1) {
-        metaCopy.type = "menu" // 没有子菜单
+        metaCopy.type = 'menu' // 没有子菜单
       } else {
-        metaCopy.type = "submenu" // 下面还能展开菜单
+        metaCopy.type = 'submenu' // 下面还能展开菜单
       }
       router.children = handleRoutes(subChildren)
     } else {
-      metaCopy.type = "menu"
+      metaCopy.type = 'menu'
     }
     routers.push(router)
   }
